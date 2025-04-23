@@ -1,0 +1,30 @@
+-- TABLE FOR STUDENTS' DETAILS
+DROP TABLE IF EXISTS students CASCADE;
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    level INT NOT NULL,
+    matric_no VARCHAR(20) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    pin VARCHAR(255) NOT NULL
+);
+
+-- TABLE FOR CANDIDATES' DETAILS
+DROP TABLE IF EXISTS candidates CASCADE;
+CREATE TABLE candidates (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    position VARCHAR(255) NOT NULL,
+    level INT NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    votes_count INT DEFAULT 0
+);
+
+-- TABLE FOR VOTES
+DROP TABLE IF EXISTS votes CASCADE;
+CREATE TABLE votes (
+    id SERIAL PRIMARY KEY,
+    voter INT NOT NULL REFERENCES students(id),
+    candidate_id INT NOT NULL REFERENCES candidates(id)
+);
