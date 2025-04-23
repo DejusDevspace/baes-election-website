@@ -1,4 +1,3 @@
-// client/src/services/authService.js
 import api from "./api";
 
 const authService = {
@@ -9,16 +8,6 @@ const authService = {
    */
   async login(credentials) {
     const response = await api.post("/auth/login", credentials);
-    return response.data;
-  },
-
-  /**
-   * Registers a new user
-   * @param {Object} userData - User registration data
-   * @returns {Promise} - New user data and token
-   */
-  async register(userData) {
-    const response = await api.post("/auth/register", userData);
     return response.data;
   },
 

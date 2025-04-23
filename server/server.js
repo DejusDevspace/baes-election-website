@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import db from "./config/db.js";
 import candidateRoutes from "./routes/candidateRoutes.js";
 import voteRoutes from "./routes/voteRoutes.js";
+import studentRoutes from "./routes/studentRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -41,7 +42,8 @@ app.get("/", (req, res) => {
 
 app.use("/vote", candidateRoutes);
 app.use("/api/candidates", candidateRoutes);
-app.use("/api/votes", voteRoutes);
+app.use("/api/vote", voteRoutes);
+app.use("/api/auth", studentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

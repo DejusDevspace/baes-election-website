@@ -48,22 +48,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const register = async (userData) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const { user, token } = await authService.register(userData);
-      localStorage.setItem("token", token);
-      setUser(user);
-      return user;
-    } catch (err) {
-      setError(err.message || "Registration failed");
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <AuthContext.Provider
       value={{ user, loading, error, login, logout, register }}
