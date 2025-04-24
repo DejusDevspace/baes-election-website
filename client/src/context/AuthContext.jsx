@@ -20,7 +20,9 @@ export const AuthProvider = ({ children }) => {
         console.error("Authentication error:", err);
         localStorage.removeItem("token");
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
     };
 

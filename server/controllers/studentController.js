@@ -9,7 +9,6 @@ const JWT_SECRET = process.env.JWT_SECRET || "custom_key";
 const JWT_EXPIRY = process.env.JWT_EXPIRY || "1h";
 
 export const loginStudent = async (req, res) => {
-  console.log(req.body);
   const { matricNumber, pin } = req.body;
 
   try {
