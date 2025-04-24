@@ -4,7 +4,6 @@ import { AuthContext } from "../../context/AuthContext";
 
 const Header = () => {
   const { student, logout } = useContext(AuthContext);
-  console.log("student: ", student);
 
   return (
     <header className="w-full p-4 z-20">

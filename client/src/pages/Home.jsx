@@ -7,7 +7,8 @@ const Home = () => {
   return student ? (
     <div className="container mx-auto overflow-hidden ">
       <div className="flex flex-col items-center justify-center min-h-[90vh]">
-        <h1>Logged In, Live Poll</h1>
+        <h1 className="text-4xl">Welcome, {student.surname}</h1>
+        <p>Logged In, Live Poll</p>
       </div>
     </div>
   ) : (

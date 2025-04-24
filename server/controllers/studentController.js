@@ -21,7 +21,6 @@ export const loginStudent = async (req, res) => {
     }
 
     const student = result.rows[0];
-    console.log(student);
 
     // const isPinValid = await bcrypt.compare(pin, student.pin);
     const isPinValid = pin == student.pin;
@@ -65,11 +64,9 @@ export const getCurrentStudent = async (req, res) => {
         .json({ message: "Unauthorized: No token provided" });
     }
 
-    console.log("authHeader: ", authHeader);
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    console.log("Decoded: ", decoded);
     const result = await db.query(
       "SELECT id, matric_no, level, department, surname FROM students WHERE id = $1",
       [decoded.id]
