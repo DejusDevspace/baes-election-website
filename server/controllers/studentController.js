@@ -1,71 +1,87 @@
-import db from "../config/db";
+import db from "../config/db.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET || "custom_key";
+const JWT_EXPIRY = process.env.JWT_EXPIRY || "1h";
 
 export const loginStudent = async (req, res) => {
+  console.log(req.body);
+  const { matricNumber, pin } = req.body;
+
   try {
-    const { matricNumber, pin } = req.body;
+    const query = "SELECT * FROM students WHERE matric_no = $1";
+    const result = await db.query(query, [matricNumber]);
 
-    // Find student
-    const student = await db.query(
-      "SELECT * FROM students WHERE student.matric_number = $1",
-      [matricNumber]
-    );
-    if (!student) {
+    if (result.rows.length === 0) {
+      return res.status(400).json({ message: "Student not found" });
+    }
+
+    const student = result.rows[0];
+    console.log(student);
+
+    // const isPinValid = await bcrypt.compare(pin, student.pin);
+    const isPinValid = pin == student.pin;
+
+    if (!isPinValid) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Verify password
-    const isPasswordValid = await bcrypt.compare(pin, student.pin);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-
-    // Generate JWT token
     const token = jwt.sign(
-      {
-        id: student.id,
-        matricNumber: student.matricNumber,
-        department: student.department,
-      },
+      { id: student.id, matric_no: student.matric_no },
       JWT_SECRET,
-      { expiresIn: JWT_EXPIRY }
+      {
+        expiresIn: JWT_EXPIRY,
+      }
     );
 
-    // Return student data (excluding password) and token
-    const studentData = {
-      id: student.id,
-      level: student.level,
-      surname: student.surname,
-      matricNumber: student.matricNumber,
-      department: student.department,
-    };
-
-    res.status(200).json({ student: studentData, token });
-  } catch (error) {
-    next(error);
+    res.json({
+      message: "Login successful",
+      token,
+      student: {
+        id: student.id,
+        matric_no: student.matric_no,
+        level: student.level,
+        department: student.department,
+        surname: student.surname,
+      },
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
 export const getCurrentStudent = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ message: "Authentication required" });
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
     }
 
+    console.log("authHeader: ", authHeader);
+    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, JWT_SECRET);
-    const student = await User.findByPk(decoded.id, {
-      attributes: { exclude: ["password"] },
-    });
 
-    if (!student) {
-      return res.status(404).json({ message: "User not found" });
+    console.log("Decoded: ", decoded);
+    const result = await db.query(
+      "SELECT id, matric_no, level, department, surname FROM students WHERE id = $1",
+      [decoded.id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Student not found" });
     }
 
-    res.status(200).json(student);
+    res.json({ student: result.rows[0] });
   } catch (error) {
-    if (error.name === "JsonWebTokenError") {
-      return res.status(401).json({ message: "Invalid token" });
-    }
-    next(error);
+    console.error("Error getting student:", error);
+    res.status(401).json({ message: "Invalid or expired token" });
   }
 };

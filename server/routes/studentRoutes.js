@@ -2,7 +2,7 @@ import express from "express";
 import {
   loginStudent,
   getCurrentStudent,
-} from "../controllers/studentController";
+} from "../controllers/studentController.js";
 
 const router = express.Router();
 

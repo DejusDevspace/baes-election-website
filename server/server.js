@@ -22,6 +22,7 @@ db.connect((err) => {
 
 // Middleware
 app.use(cors());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Test route for database connection
@@ -40,10 +41,9 @@ app.get("/", (req, res) => {
   res.json({ response: { message: "Hello World!" } });
 });
 
-app.use("/vote", candidateRoutes);
 app.use("/api/candidates", candidateRoutes);
 app.use("/api/vote", voteRoutes);
-app.use("/api/auth", studentRoutes);
+app.use("/api/students/auth", studentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     matricNumber: "",
     pin: "",
   });
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,9 +22,28 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    resetFormData();
+
+    try {
+      const student = await login({
+        matricNumber: formData.matricNumber,
+        pin: formData.pin,
+      });
+
+      console.log("Login successful:", student);
+
+      // Redirect after login
+      navigate("/vote");
+
+      resetFormData();
+    } catch (error) {
+      console.error(
+        "Login failed:",
+        error.message || "An unexpected error occurred"
+      );
+      alert(error.message || "Login failed");
+    }
   };
 
   return (

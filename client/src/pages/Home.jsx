@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
-  return (
+  const { student } = useContext(AuthContext);
+
+  return student ? (
+    <div className="container mx-auto overflow-hidden ">
+      <div className="flex flex-col items-center justify-center min-h-[90vh]">
+        <h1>Logged In, Live Poll</h1>
+      </div>
+    </div>
+  ) : (
     <div className="container mx-auto overflow-hidden">
       <div className="flex min-h-[90vh] flex-col lg:flex-row gap-12 justify-center items-center">
         <div className="flex flex-col gap-4 items-center text-center lg:items-start lg:text-left">

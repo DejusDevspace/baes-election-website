@@ -1,10 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
-import authService from "../services/authService";
+import authService from "../services/AuthService";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,8 +13,8 @@ export const AuthProvider = ({ children }) => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const userData = await authService.getCurrentUser();
-          setUser(userData);
+          const studentData = await authService.getCurrentStudent();
+          setStudent(studentData);
         }
       } catch (err) {
         console.error("Authentication error:", err);
@@ -31,10 +31,10 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const { user, token } = await authService.login(credentials);
+      const { student, token } = await authService.login(credentials);
       localStorage.setItem("token", token);
-      setUser(user);
-      return user;
+      setStudent(student);
+      return student;
     } catch (err) {
       setError(err.message || "Login failed");
       throw err;
@@ -45,13 +45,11 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    setUser(null);
+    setStudent(null);
   };
 
   return (
-    <AuthContext.Provider
-      value={{ user, loading, error, login, logout, register }}
-    >
+    <AuthContext.Provider value={{ student, loading, error, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

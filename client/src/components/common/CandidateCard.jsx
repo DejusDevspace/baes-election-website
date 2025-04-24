@@ -11,7 +11,7 @@ const CandidateCard = ({ candidate }) => {
           type="checkbox"
           name="candidatePosition"
           value="candidateId"
-          onclick={() => console.log("Clicked")}
+          onClick={() => console.log("Clicked")}
           required
         />
         <p>Vote</p>
