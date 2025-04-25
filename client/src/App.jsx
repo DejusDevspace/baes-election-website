@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { VotingProvider } from "./context/VotingContext";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import baesLogo from "./assets/logo.png";
@@ -33,13 +34,13 @@ const AppContent = () => {
 };
 
 function App() {
-  // const { student, loading } = useContext(AuthContext);
-
   return (
     <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <VotingProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </VotingProvider>
     </AuthProvider>
   );
 }

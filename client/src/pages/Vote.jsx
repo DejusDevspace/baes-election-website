@@ -1,41 +1,60 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useVoting } from "../context/VotingContext";
 import CandidateCard from "../components/common/CandidateCard";
+import { IoIosArrowDown } from "react-icons/io";
+import CandidateForm from "../components/common/CandidateForm";
 
 const Vote = () => {
   const { student } = useContext(AuthContext);
-  const [candidates, setCandidates] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { candidates, positions } = useVoting();
+  const headCandidates = candidates.filter((cand, index) => {
+    return cand.position === "Head";
+  });
+  const chairmanCandidates = candidates.filter((cand, index) => {
+    return cand.position === "Chairman";
+  });
+  const secretaryCandidates = candidates.filter((cand, index) => {
+    return cand.position === "Secretary";
+  });
+  const [isToggled, setIsToggled] = useState(0);
 
-  // const fetchCandidates = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:5000/vote");
-  //     setCandidates(response.data);
-  //   } catch (error) {
-  //     console.error("Error fetching candidates:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchCandidates();
-  // }, []);
+  const handleToggle = (id) => {
+    setIsToggled(id);
+  };
 
   return (
     <div className="container mx-auto">
-      <div className="flex flex-col min-h-[90vh] py-12">
+      <div className="flex flex-col min-h-[90vh] py-12 gap-8">
         <h1 className="text-3xl">
-          Welcome,{" "}
-          <span className="text-special">{student.student.surname}</span>
+          Welcome, <span className="text-special">{student.surname}</span>
         </h1>
         <div className="flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-3xl">President</h1>
+          {positions.map((pos, index) => {
+            return (
+              <div className="flex flex-col w-full gap-6">
+                <div
+                  key={index}
+                  className="relative p-4 bg-gray-500 rounded-xl w-full flex justify-center items-center gap-8 
+                text-center cursor-pointer"
+                  onClick={() => handleToggle(index)}
+                >
+                  <h1 className="text-3xl">{pos.position}</h1>
+                  <div className="absolute right-0 mx-4 self-end">
+                    <IoIosArrowDown className="text-3xl" />
+                  </div>
+                </div>
+                {index === isToggled && (
+                  <CandidateForm
+                    candidates={candidates.filter((cand, index) => {
+                      return cand.position === pos.position;
+                    })}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
-        <div className="flex flex-col gap-4 justify-center items-center">
-          <h1 className="text-3xl">Vice President</h1>
-        </div>
-        <CandidateCard candidate={"candidateObject"} />
       </div>
     </div>
   );

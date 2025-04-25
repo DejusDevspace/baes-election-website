@@ -26,7 +26,7 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // Automatically logout on unauthorized responses
       localStorage.removeItem("token");
-      // You could potentially redirect to login page here
+      // I'll consider a redirect to login page here
       // or use a custom event to notify AuthContext
     }
     return Promise.reject(error);

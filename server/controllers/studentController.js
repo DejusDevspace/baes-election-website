@@ -75,9 +75,11 @@ export const getCurrentStudent = async (req, res) => {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    res.json({ student: result.rows[0] });
+    res.json(result.rows[0]);
   } catch (error) {
     console.error("Error getting student:", error);
     res.status(401).json({ message: "Invalid or expired token" });
   }
 };
+
+export const getStudentVotes = async (req, res) => {};

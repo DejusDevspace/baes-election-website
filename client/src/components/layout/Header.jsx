@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import baesLogo from "../../assets/logo.png";
 import { AuthContext } from "../../context/AuthContext";
+import { IoExitOutline } from "react-icons/io5";
 
 const Header = () => {
   const { student, logout } = useContext(AuthContext);
@@ -21,10 +22,12 @@ const Header = () => {
                 <li>
                   <a href="/vote">Vote</a>
                 </li>
-                <li>
-                  <button onClick={logout} className="cursor-pointer">
-                    Log Out
-                  </button>
+                <li
+                  className="flex gap-2 items-center cursor-pointer"
+                  onClick={logout}
+                >
+                  <span>Log Out</span>
+                  <IoExitOutline className="text-2xl text-red-800" />
                 </li>
               </div>
             ) : (
