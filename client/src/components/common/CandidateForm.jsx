@@ -7,7 +7,7 @@ const CandidateForm = ({ candidates }) => {
   return (
     <div className="flex gap-4">
       {candidates.map((person, index) => {
-        return <CandidateCard candidate={person} />;
+        return <CandidateCard key={index} candidate={person} />;
       })}
     </div>
   );

@@ -3,10 +3,9 @@ import api from "./api";
 const votingService = {
   /**
    * Get all candidates for an election
-   * @param {string} electionId - ID of the election
    * @returns {Promise<Array>} - List of candidates
    */
-  async getAllCandidates(electionId) {
+  async getAllCandidates() {
     const response = await api.get(`/candidates`);
     return response.data;
   },
@@ -17,6 +16,22 @@ const votingService = {
    */
   async getPositions() {
     const response = await api.get(`/candidates/positions`);
+    return response.data;
+  },
+
+  /**
+   * Get senate head candiates based on level and department
+   * @param {Object} studentData - Candidate data object
+   * @param {string} studentData.position - Position of the candidate
+   * @param {string} studentData.level - Level of the student
+   * @param {string} studentData.department - Department of the student
+   * @returns {Promise<Array>} - List of candidates under criteria
+   */
+  async getSenateCandidatesForStudent(studentData) {
+    console.log("Received studentData:", studentData);
+    const response = await api.get(
+      `/candidates/positions/senate/${studentData.position}/${studentData.department}/${studentData.level}`
+    );
     return response.data;
   },
 

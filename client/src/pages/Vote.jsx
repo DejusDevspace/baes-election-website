@@ -7,16 +7,8 @@ import CandidateForm from "../components/common/CandidateForm";
 
 const Vote = () => {
   const { student } = useContext(AuthContext);
-  const { candidates, positions } = useVoting();
-  const headCandidates = candidates.filter((cand, index) => {
-    return cand.position === "Head";
-  });
-  const chairmanCandidates = candidates.filter((cand, index) => {
-    return cand.position === "Chairman";
-  });
-  const secretaryCandidates = candidates.filter((cand, index) => {
-    return cand.position === "Secretary";
-  });
+  const { candidates, positions, senateCandidates } = useVoting();
+  console.log("Senate Candidates:", senateCandidates);
   const [isToggled, setIsToggled] = useState(0);
 
   const handleToggle = (id) => {
@@ -32,9 +24,8 @@ const Vote = () => {
         <div className="flex flex-col gap-4 justify-center items-center">
           {positions.map((pos, index) => {
             return (
-              <div className="flex flex-col w-full gap-6">
+              <div key={index} className="flex flex-col w-full gap-6">
                 <div
-                  key={index}
                   className="relative p-4 bg-gray-500 rounded-xl w-full flex justify-center items-center gap-8 
                 text-center cursor-pointer"
                   onClick={() => handleToggle(index)}
@@ -46,6 +37,7 @@ const Vote = () => {
                 </div>
                 {index === isToggled && (
                   <CandidateForm
+                    key={index}
                     candidates={candidates.filter((cand, index) => {
                       return cand.position === pos.position;
                     })}

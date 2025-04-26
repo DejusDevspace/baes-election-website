@@ -1,4 +1,3 @@
-// client/src/context/VotingContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
 import votingService from "../services/votingService";
 import { AuthContext } from "./AuthContext";
@@ -9,6 +8,7 @@ export const VotingProvider = ({ children }) => {
   const { student } = useContext(AuthContext);
   const [candidates, setCandidates] = useState([]);
   const [positions, setPositions] = useState([]);
+  const [senateCandidates, setSenateCandidates] = useState([]);
   const [userVotes, setUserVotes] = useState({});
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
@@ -30,6 +30,17 @@ export const VotingProvider = ({ children }) => {
 
           const positionsData = await votingService.getPositions();
           setPositions(positionsData);
+
+          const studentData = {
+            position: "Senate Head",
+            level: student.level,
+            department: student.department,
+          };
+          console.log("Student Data:", studentData);
+
+          const senateCandidatesData =
+            await votingService.getSenateCandidatesForStudent(studentData);
+          setSenateCandidates(senateCandidatesData);
 
           // Check if user has already voted
           // const userVotesData = await votingService.getUserVotes(student.id);
@@ -143,6 +154,7 @@ export const VotingProvider = ({ children }) => {
         hasCompletedVoting,
         getCandidateById,
         getCandidatesByPosition,
+        senateCandidates,
       }}
     >
       {children}

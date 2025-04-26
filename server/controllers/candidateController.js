@@ -35,3 +35,20 @@ export const getPositions = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch candidates" });
   }
 };
+
+export const getSenateCandidatesForStudent = async (req, res) => {
+  const { position, level, department } = req.params;
+
+  console.log(req.params);
+
+  try {
+    const result = await db.query(
+      "SELECT * FROM candidates WHERE candidates.position = $1 and candidates.department = $2 and candidates.level = $3",
+      [position, department, level]
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch candidates" });
+  }
+};
