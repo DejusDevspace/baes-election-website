@@ -8,13 +8,12 @@ export const VotingProvider = ({ children }) => {
   const { student } = useContext(AuthContext);
   const [candidates, setCandidates] = useState([]);
   const [positions, setPositions] = useState([]);
-  const [senateCandidates, setSenateCandidates] = useState([]);
   const [userVotes, setUserVotes] = useState({});
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch active election when student changes
+  // Fetch election data when student changes
   useEffect(() => {
     const fetchElectionData = async () => {
       if (!student) {
@@ -24,23 +23,12 @@ export const VotingProvider = ({ children }) => {
 
       try {
         if (student) {
-          // Load candidates and positions for this election
+          // Load candidates and positions
           const candidatesData = await votingService.getAllCandidates();
           setCandidates(candidatesData);
 
-          const positionsData = await votingService.getPositions();
+          const positionsData = await votingService.getAllPositions();
           setPositions(positionsData);
-
-          const studentData = {
-            position: "Senate Head",
-            level: student.level,
-            department: student.department,
-          };
-          console.log("Student Data:", studentData);
-
-          const senateCandidatesData =
-            await votingService.getSenateCandidatesForStudent(studentData);
-          setSenateCandidates(senateCandidatesData);
 
           // Check if user has already voted
           // const userVotesData = await votingService.getUserVotes(student.id);
@@ -127,18 +115,6 @@ export const VotingProvider = ({ children }) => {
     return positions.every((position) => hasVoted(position.id));
   };
 
-  // Get candidate by ID
-  const getCandidateById = (candidateId) => {
-    return candidates.find((candidate) => candidate.id === candidateId) || null;
-  };
-
-  // Get candidates for a specific position
-  const getCandidatesByPosition = (positionId) => {
-    return candidates.filter(
-      (candidate) => candidate.positionId === positionId
-    );
-  };
-
   return (
     <VotingContext.Provider
       value={{
@@ -152,9 +128,6 @@ export const VotingProvider = ({ children }) => {
         fetchResults,
         hasVoted,
         hasCompletedVoting,
-        getCandidateById,
-        getCandidatesByPosition,
-        senateCandidates,
       }}
     >
       {children}

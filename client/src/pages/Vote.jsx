@@ -7,8 +7,21 @@ import CandidateForm from "../components/common/CandidateForm";
 
 const Vote = () => {
   const { student } = useContext(AuthContext);
-  const { candidates, positions, senateCandidates } = useVoting();
-  console.log("Senate Candidates:", senateCandidates);
+  const { candidates, positions } = useVoting();
+
+  const executiveCandidates = candidates.filter(
+    (candidate) => candidate.position !== "Senate Head"
+  );
+  // console.log("Executive Candidates: ", executiveCandidates);
+
+  const senateHeadCandidates = candidates.filter(
+    (candidate) =>
+      candidate.position === "Senate Head" &&
+      candidate.level === student.level &&
+      candidate.department === student.department
+  );
+  // console.log("Senate Head Candidates: ", senateHeadCandidates);
+
   const [isToggled, setIsToggled] = useState(0);
 
   const handleToggle = (id) => {
@@ -22,6 +35,7 @@ const Vote = () => {
           Welcome, <span className="text-special">{student.surname}</span>
         </h1>
         <div className="flex flex-col gap-4 justify-center items-center">
+          <h2 className="text-3xl">Executive Candidates</h2>
           {positions.map((pos, index) => {
             return (
               <div key={index} className="flex flex-col w-full gap-6">
@@ -46,6 +60,9 @@ const Vote = () => {
               </div>
             );
           })}
+        </div>
+        <div className="flex flex-col gap-4 justify-center items-center">
+          <h2>Senate Candidates</h2>
         </div>
       </div>
     </div>

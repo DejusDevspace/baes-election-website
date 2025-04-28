@@ -2,7 +2,7 @@ import api from "./api";
 
 const votingService = {
   /**
-   * Get all candidates for an election
+   * Get all candidates for the election
    * @returns {Promise<Array>} - List of candidates
    */
   async getAllCandidates() {
@@ -14,14 +14,14 @@ const votingService = {
    * Get positions for an election
    * @returns {Promise<Array>} - List of positions
    */
-  async getPositions() {
+  async getAllPositions() {
     const response = await api.get(`/candidates/positions`);
     return response.data;
   },
 
   /**
    * Get senate head candiates based on level and department
-   * @param {Object} studentData - Candidate data object
+   * @param {Object} studentData - Student data data object
    * @param {string} studentData.position - Position of the candidate
    * @param {string} studentData.level - Level of the student
    * @param {string} studentData.department - Department of the student
