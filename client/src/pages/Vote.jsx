@@ -9,23 +9,72 @@ const Vote = () => {
   const { student } = useContext(AuthContext);
   const { candidates, positions } = useVoting();
 
+  const executivePositions = positions.filter(
+    (pos) => pos.position.toLowerCase() !== "senate head"
+  );
+  console.log("Executive Positions: ", executivePositions);
+
   const executiveCandidates = candidates.filter(
-    (candidate) => candidate.position !== "Senate Head"
+    (candidate) => candidate.position.toLowerCase() !== "senate head"
   );
   // console.log("Executive Candidates: ", executiveCandidates);
 
+  const senatePositions = positions.filter(
+    (pos) => pos.position.toLowerCase() === "senate head"
+  );
+  // console.log("Senate Head Positions: ", senatePositions);
+
   const senateHeadCandidates = candidates.filter(
     (candidate) =>
-      candidate.position === "Senate Head" &&
+      candidate.position.toLowerCase() === "senate head" &&
       candidate.level === student.level &&
       candidate.department === student.department
   );
   // console.log("Senate Head Candidates: ", senateHeadCandidates);
 
+  // Priority order for executive positions
+  const positionPriority = [
+    "President",
+    "Vice President",
+    "Senate Chairman",
+    "Deputy Senate Chairman",
+    "General Secretary",
+    "Assistant General Secretary",
+    "Treasurer",
+    "Financial Secretary",
+    "Sports Director",
+    "Assistant Sports Director",
+    "Social Director",
+    "Assistant Social Director",
+    "Academic Director",
+    "Assistant Academic Director",
+    "Welfare Director",
+    "Assistant Welfare Director",
+    "P.R.O",
+  ];
+
+  // Sorting function
+  const sortedExecutivePositions = executivePositions.sort((a, b) => {
+    const aPriority = positionPriority.indexOf(a.position);
+    const bPriority = positionPriority.indexOf(b.position);
+
+    // Positions not in list should go to the bottom
+    if (aPriority === -1) return 1;
+    if (bPriority === -1) return -1;
+
+    return aPriority - bPriority;
+  });
+
+  // console.log("Sorted E Positions:", sortedExecutivePositions);
+
   const [isToggled, setIsToggled] = useState(0);
 
   const handleToggle = (id) => {
-    setIsToggled(id);
+    if (isToggled === id) {
+      setIsToggled(null);
+    } else {
+      setIsToggled(id);
+    }
   };
 
   return (
@@ -36,7 +85,7 @@ const Vote = () => {
         </h1>
         <div className="flex flex-col gap-4 justify-center items-center">
           <h2 className="text-3xl">Executive Candidates</h2>
-          {positions.map((pos, index) => {
+          {sortedExecutivePositions.map((pos, index) => {
             return (
               <div key={index} className="flex flex-col w-full gap-6">
                 <div
@@ -52,7 +101,7 @@ const Vote = () => {
                 {index === isToggled && (
                   <CandidateForm
                     key={index}
-                    candidates={candidates.filter((cand, index) => {
+                    candidates={executiveCandidates.filter((cand, index) => {
                       return cand.position === pos.position;
                     })}
                   />

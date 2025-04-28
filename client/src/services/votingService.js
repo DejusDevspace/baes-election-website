@@ -20,22 +20,6 @@ const votingService = {
   },
 
   /**
-   * Get senate head candiates based on level and department
-   * @param {Object} studentData - Student data data object
-   * @param {string} studentData.position - Position of the candidate
-   * @param {string} studentData.level - Level of the student
-   * @param {string} studentData.department - Department of the student
-   * @returns {Promise<Array>} - List of candidates under criteria
-   */
-  async getSenateCandidatesForStudent(studentData) {
-    console.log("Received studentData:", studentData);
-    const response = await api.get(
-      `/candidates/positions/senate/${studentData.position}/${studentData.department}/${studentData.level}`
-    );
-    return response.data;
-  },
-
-  /**
    * Get a user's votes for an election
    * @param {string} studentId - ID of the student
    * @returns {Promise<Object>} - Map of position IDs to candidate IDs
