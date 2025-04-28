@@ -7,7 +7,7 @@ const authService = {
    * @returns {Promise} - User data and token
    */
   async login(credentials) {
-    const response = await api.post("/students/auth/login", credentials);
+    const response = await api.post("/student/auth/login", credentials);
     return response.data;
   },
 
@@ -16,7 +16,7 @@ const authService = {
    * @returns {Promise} - Current user data
    */
   async getCurrentStudent() {
-    const response = await api.get("/students/auth/me");
+    const response = await api.get("/student/auth/me");
     return response.data;
   },
 
