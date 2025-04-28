@@ -42,8 +42,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/candidates", candidateRoutes);
-app.use("/api/vote", voteRoutes);
-app.use("/api/students", studentRoutes);
+app.use("/api/votes", voteRoutes);
+app.use("/api/student", studentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

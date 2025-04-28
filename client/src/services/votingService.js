@@ -18,14 +18,14 @@ const votingService = {
     const response = await api.get(`/candidates/positions`);
     return response.data;
   },
-
+  // Positions not in list go to bottom
   /**
    * Get a user's votes for an election
    * @param {string} studentId - ID of the student
    * @returns {Promise<Object>} - Map of position IDs to candidate IDs
    */
   async getUserVotes(studentId) {
-    const response = await api.get(`api/student/my-votes/${studentId}`);
+    const response = await api.get(`/student/my-votes/${studentId}`);
 
     // Transform array of votes to a map of positionId -> candidateId
     const votesMap = {};
@@ -46,7 +46,17 @@ const votingService = {
    * @returns {Promise<Object>} - Vote confirmation
    */
   async castVote(voteData) {
-    const response = await api.post("/votes", voteData);
+    const response = await api.post("/votes/cast-votes", voteData);
+    return response.data;
+  },
+
+  /**
+   * Check if user has voted
+   * @param {string} studentId - ID of the student
+   * @returns {Promise<boolean>} - True if user has voted, false otherwise
+   */
+  async hasVoted(studentId) {
+    const response = await api.get(`/student/has-voted/${studentId}`);
     return response.data;
   },
 
@@ -55,8 +65,8 @@ const votingService = {
    * @param {string} electionId - ID of the election
    * @returns {Promise<Object>} - Election results data
    */
-  async getResults(electionId) {
-    const response = await api.get(`/elections/${electionId}/results`);
+  async getResults() {
+    const response = await api.get(`/election/results`);
     return response.data;
   },
 };

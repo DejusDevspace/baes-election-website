@@ -9,6 +9,7 @@ export const VotingProvider = ({ children }) => {
   const [candidates, setCandidates] = useState([]);
   const [positions, setPositions] = useState([]);
   const [userVotes, setUserVotes] = useState({});
+  const [hasVoted, setHasVoted] = useState(false);
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -31,8 +32,8 @@ export const VotingProvider = ({ children }) => {
           setPositions(positionsData);
 
           // Check if user has already voted
-          // const userVotesData = await votingService.getUserVotes(student.id);
-          // setUserVotes(userVotesData);
+          const { votingStatus } = await votingService.hasVoted(student.id);
+          setHasVoted(votingStatus);
         }
       } catch (err) {
         console.error("Error fetching election data:", err);
@@ -46,14 +47,10 @@ export const VotingProvider = ({ children }) => {
   }, [student]);
 
   // Cast a vote
-  const castVote = async (positionId, candidateId) => {
+  const castVote = async (voteData) => {
     try {
       setLoading(true);
       setError(null);
-
-      if (!currentElection) {
-        throw new Error("No active election");
-      }
 
       if (!student) {
         throw new Error("You must be logged in to vote");
@@ -61,16 +58,15 @@ export const VotingProvider = ({ children }) => {
 
       // Submit vote to server
       const vote = await votingService.castVote({
-        positionId,
-        candidateId,
-        voterId: student.id,
+        voteData,
+        studentId: student.id,
       });
 
       // Update local state to reflect the vote
-      setUserVotes((prev) => ({
-        ...prev,
-        [positionId]: candidateId,
-      }));
+      // setUserVotes((prev) => ({
+      //   ...prev,
+      //   [voteData.position]: voteData.id,
+      // }));
 
       return vote;
     } catch (err) {
@@ -104,30 +100,28 @@ export const VotingProvider = ({ children }) => {
     }
   };
 
-  // Check if user has voted for a specific position
-  const hasVoted = (positionId) => {
-    return Boolean(userVotes[positionId]);
-  };
+  // const hasVoted = (positionId) => {
+  //   return Boolean(userVotes[positionId]);
+  // };
 
-  // Check if user has completed voting for all positions
-  const hasCompletedVoting = () => {
-    if (!positions.length) return false;
-    return positions.every((position) => hasVoted(position.id));
-  };
+  // // Check if user has completed voting for all positions
+  // const hasCompletedVoting = () => {
+  //   if (!positions.length) return false;
+  //   return positions.every((position) => hasVoted(position.id));
+  // };
 
   return (
     <VotingContext.Provider
       value={{
         candidates,
         positions,
-        userVotes,
+        // userVotes,
         results,
         loading,
         error,
         castVote,
         fetchResults,
         hasVoted,
-        hasCompletedVoting,
       }}
     >
       {children}

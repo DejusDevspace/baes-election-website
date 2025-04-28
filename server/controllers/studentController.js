@@ -82,4 +82,23 @@ export const getCurrentStudent = async (req, res) => {
   }
 };
 
-export const getStudentVotes = async (req, res) => {};
+export const getUserVoted = async (req, res) => {
+  const { studentId } = req.params;
+
+  try {
+    const response = await db.query(
+      "SELECT * FROM votes WHERE votes.voter = $1",
+      [studentId]
+    );
+
+    console.log("User voted?", response.rows.length > 0);
+
+    res.json({
+      message: "Successfully checked user voting status",
+      votingStatus: response.rows.length > 0,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Error getting voting details for user" });
+  }
+};

@@ -3,6 +3,6 @@ import { castVote } from "../controllers/voteController.js";
 
 const router = express.Router();
 
-router.post("/", castVote);
+router.post("/cast-votes", castVote);
 
 export default router;
