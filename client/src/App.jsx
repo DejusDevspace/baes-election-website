@@ -6,29 +6,33 @@ import { VotingProvider } from "./context/VotingContext";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import baesLogo from "./assets/logo.png";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AppContent = () => {
   const { loading } = useContext(AuthContext);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen relative flex items-center justify-center overflow-hidden bg-primary text-white">
-        <img
-          src={baesLogo}
-          alt="logo"
-          className="min-h-[20%] z-10 animate-spin-slow"
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="relative flex flex-col overflow-x-hidden bg-primary z-0">
-      <Header />
-      <main className="relative z-10 flex-grow flex flex-col justify-center items-center">
-        <AppRoutes />
-      </main>
-      <Footer />
+      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+
+      {loading ? (
+        <div className="min-h-screen relative flex items-center justify-center overflow-hidden text-white">
+          <img
+            src={baesLogo}
+            alt="logo"
+            className="min-h-[20%] z-10 animate-spin-slow"
+          />
+        </div>
+      ) : (
+        <>
+          <Header />
+          <main className="relative z-10 flex-grow flex flex-col justify-center items-center">
+            <AppRoutes />
+          </main>
+          <Footer />
+        </>
+      )}
     </div>
   );
 };

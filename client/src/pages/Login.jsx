@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Login = () => {
   });
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  // const [errorMsg, setErrorMsg] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +34,8 @@ const Login = () => {
       });
 
       console.log("Login successful:", student);
-
+      // console.log("Student data:", student);
+      toast.success("Login successful!");
       // Redirect after login
       navigate("/vote");
 
@@ -42,7 +45,14 @@ const Login = () => {
         "Login failed:",
         error.message || "An unexpected error occurred"
       );
-      alert(error.message || "Login failed");
+
+      if (error.response?.status === 401) {
+        toast.error("Incorrect password. Please try again.");
+      } else if (error.response?.status === 404) {
+        toast.error("User not registered." || error.message);
+      } else {
+        toast.error("Something went wrong. Please try again later.");
+      }
     }
   };
 
@@ -91,6 +101,7 @@ const Login = () => {
             Let Me In!
           </button>
         </form>
+        {/* {errorMsg && <p className="text-red-500 mt-2">{errorMsg}</p>} */}
       </div>
     </div>
   );
