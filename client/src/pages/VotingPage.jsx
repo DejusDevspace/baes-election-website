@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useVoting } from "../context/VotingContext";
 import { IoIosArrowDown } from "react-icons/io";
 import CandidateForm from "../components/common/CandidateForm";
+import Modal from "../components/common/Modal";
 
 const VotingPage = () => {
   const { student } = useContext(AuthContext);
   const { candidates, positions, castVote, hasVoted } = useVoting();
   const [votes, setVotes] = useState({});
   const [isToggled, setIsToggled] = useState(0);
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const executivePositions = positions.filter(
     (pos) => pos.position.toLowerCase() !== "senate head"
@@ -71,6 +75,10 @@ const VotingPage = () => {
     }
   };
 
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
   const handleVote = (position, candidateId) => {
     setVotes((prev) => ({
       ...prev,
@@ -78,17 +86,22 @@ const VotingPage = () => {
     }));
   };
 
-  const handleSubmitVotes = async () => {
+  const handleConfirmSubmit = async () => {
+    setIsSubmitting(true);
+
     try {
-      console.log("Submitting votes:", votes);
+      // console.log("Submitting votes:", votes);
       // Send votes to backend
       await castVote(votes);
       alert("Votes submitted successfully!");
       // Redirect user
-      // navigate("/thank-you");
+      navigate("/response-recorded");
     } catch (error) {
       console.error("Error submitting votes:", error);
       alert("Failed to submit votes");
+    } finally {
+      setIsSubmitting(false);
+      setShowModal(false);
     }
   };
 
@@ -156,7 +169,7 @@ const VotingPage = () => {
         <div className="flex justify-center py-10">
           <button
             disabled={!allPositionsVoted}
-            onClick={handleSubmitVotes}
+            onClick={handleOpenModal}
             className={`px-6 py-3 text-white rounded-lg ${
               allPositionsVoted
                 ? "bg-gradient-to-b from-[var(--color-special)] to-[var(--color-accent)] font-bold cursor-pointer hover:scale-105 transition-all duration-300"
@@ -165,6 +178,19 @@ const VotingPage = () => {
           >
             Submit Votes
           </button>
+
+          {/* Confirmation Modal */}
+          {showModal && (
+            <Modal
+              title="Are you sure?"
+              description="You will not be able to change your votes after this!"
+              confirmText="Yes, submit"
+              cancelText="Cancel"
+              onCancel={() => setShowModal(false)}
+              onConfirm={handleConfirmSubmit}
+              isLoading={isSubmitting}
+            />
+          )}
         </div>
       </div>
     </div>

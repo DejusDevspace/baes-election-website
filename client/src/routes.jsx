@@ -26,7 +26,14 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/response-recorded" element={<ThankYou />} />
+      <Route
+        path="/response-recorded"
+        element={
+          <ProtectedRoute>
+            <ThankYou />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/404" element={<NotFound />} />
       <Route path="*" element={<Navigate to="/404" />} />
     </Routes>
