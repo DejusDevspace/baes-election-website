@@ -57,7 +57,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative  min-h-screen w-[100vw] overflow-hidden">
+    <div className="relative w-[100vw] overflow-hidden">
       <div className="relative z-10 container mx-auto flex flex-col items-center gap-4 py-12 xl:py-24 px-4">
         <form
           className="w-full max-w-2xl mt-12 backdrop-blur-lg rounded-2xl border border-white/10 p-8 shadow-[0_0_20px_5px_var(--color-neonBlue)] flex flex-col gap-6"

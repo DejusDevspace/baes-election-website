@@ -13,7 +13,7 @@ const AppContent = () => {
   const { loading } = useContext(AuthContext);
 
   return (
-    <div className="relative flex flex-col overflow-x-hidden bg-primary z-0">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-primary z-0">
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />
 
       {loading ? (

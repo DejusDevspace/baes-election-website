@@ -5,24 +5,38 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative flex flex-col items-center justify-center bg-primary text-white">
-      <div className="w-full mx-0 p-12 bg-black flex flex-col gap-4 justify-center items-center">
-        <div className="flex gap-8 p-4 justify-center items-center">
+    <footer className="bg-black text-white">
+      <div className="flex flex-col items-center gap-4 p-6 md:p-12">
+        <div className="flex items-center gap-4">
           <p className="text-sm">Follow Us</p>
-          <div className="flex gap-6 text-xl">
-            <a href="#">
+          <div className="flex gap-4 text-xl">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="hover:text-special hover:scale-105 transition-all duration-300"
+            >
               <FaInstagram />
             </a>
-            <a href="#">
+            <a
+              href="#"
+              aria-label="Twitter"
+              className="hover:text-special hover:scale-105 transition-all duration-300"
+            >
               <FaTwitter />
             </a>
-            <a href="#">
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="hover:text-special hover:scale-105 transition-all duration-300"
+            >
               <FaLinkedin />
             </a>
           </div>
         </div>
-        <div className="border-[1px] w-[50%] border-primary"></div>
-        <p className="text-sm">Copyright © {currentYear} • BAES</p>
+        <div className="w-[50%] border-t border-primary" />
+        <p className="text-sm text-center">
+          © {currentYear} • BAES. All rights reserved.
+        </p>
       </div>
     </footer>
   );

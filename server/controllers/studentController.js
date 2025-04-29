@@ -16,7 +16,7 @@ export const loginStudent = async (req, res) => {
     const result = await db.query(query, [matricNumber]);
 
     if (result.rows.length === 0) {
-      return res.status(400).json({ message: "Student not found" });
+      return res.status(404).json({ message: "Student not found" });
     }
 
     const student = result.rows[0];
@@ -25,7 +25,7 @@ export const loginStudent = async (req, res) => {
     const isPinValid = pin == student.pin;
 
     if (!isPinValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Incorrect password entered!" });
     }
 
     const token = jwt.sign(
@@ -91,7 +91,7 @@ export const getUserVoted = async (req, res) => {
       [studentId]
     );
 
-    console.log("User voted?", response.rows.length > 0);
+    // console.log("User voted?", response.rows.length > 0);
 
     res.json({
       message: "Successfully checked user voting status",
