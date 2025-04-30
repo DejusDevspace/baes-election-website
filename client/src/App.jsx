@@ -14,7 +14,7 @@ const AppContent = () => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-primary z-0">
-      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+      <ToastContainer position="top-left" autoClose={3000} theme="colored" />
 
       {loading ? (
         <div className="min-h-screen relative flex items-center justify-center overflow-hidden text-white">

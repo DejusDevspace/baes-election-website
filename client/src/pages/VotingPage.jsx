@@ -5,6 +5,7 @@ import { useVoting } from "../context/VotingContext";
 import { IoIosArrowDown } from "react-icons/io";
 import CandidateForm from "../components/common/CandidateForm";
 import Modal from "../components/common/Modal";
+import { toast } from "react-toastify";
 
 const VotingPage = () => {
   const { student } = useContext(AuthContext);
@@ -93,12 +94,12 @@ const VotingPage = () => {
       // console.log("Submitting votes:", votes);
       // Send votes to backend
       await castVote(votes);
-      alert("Votes submitted successfully!");
+      toast.success("Votes submitted successfully!");
       // Redirect user
       navigate("/response-recorded");
     } catch (error) {
-      console.error("Error submitting votes:", error);
-      alert("Failed to submit votes");
+      // console.error("Error submitting votes:", error);
+      toast.error("Error submitting votes. Please try again.");
     } finally {
       setIsSubmitting(false);
       setShowModal(false);
