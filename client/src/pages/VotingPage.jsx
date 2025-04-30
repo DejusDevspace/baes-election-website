@@ -111,7 +111,7 @@ const VotingPage = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="flex flex-col py-12 gap-8">
+      <div className="flex flex-col py-12 gap-8 p-2 xl:p-4">
         <h1 className="text-3xl">
           Welcome, <span className="text-special">{student.surname}</span>
         </h1>
