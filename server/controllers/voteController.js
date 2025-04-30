@@ -1,13 +1,9 @@
 import db from "../config/db.js";
 
-// Cast vote
 export const castVote = async (req, res) => {
   const { voteData, studentId } = req.body;
 
   try {
-    // console.log("Vote data:", voteData);
-    // console.log("Student ID:", studentId);
-
     // Start a transaction
     await db.query("BEGIN");
 

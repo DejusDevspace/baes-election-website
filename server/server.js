@@ -29,7 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/test-db", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM candidates;");
-    res.json({ data: result.rows });
+    res.json({
+      message: "Database connected successfully",
+      data: result.rows,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Database connection failed" });

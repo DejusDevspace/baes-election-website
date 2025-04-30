@@ -91,8 +91,6 @@ export const getUserVoted = async (req, res) => {
       [studentId]
     );
 
-    // console.log("User voted?", response.rows.length > 0);
-
     res.json({
       message: "Successfully checked user voting status",
       votingStatus: response.rows.length > 0,

@@ -1,6 +1,5 @@
 import db from "../config/db.js";
 
-// GET all candidates
 export const getAllCandidates = async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM candidates");
