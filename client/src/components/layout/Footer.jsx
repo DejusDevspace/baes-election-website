@@ -11,22 +11,28 @@ const Footer = () => {
           <p className="text-sm">Follow Us</p>
           <div className="flex gap-4 text-xl">
             <a
-              href="#"
+              href="https://www.instagram.com/bowen_engr?igsh=MWtqZTU2Y3BxaG45ag=="
               aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-special hover:scale-105 transition-all duration-300"
             >
               <FaInstagram />
             </a>
             <a
-              href="#"
+              href="https://x.com/BAES_engineers"
               aria-label="Twitter"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-special hover:scale-105 transition-all duration-300"
             >
               <FaTwitter />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/bowen-association-of-engineering-students/"
               aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-special hover:scale-105 transition-all duration-300"
             >
               <FaLinkedin />
