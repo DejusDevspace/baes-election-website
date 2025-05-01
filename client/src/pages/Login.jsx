@@ -96,7 +96,7 @@ const Login = () => {
           <button
             type="submit"
             className="self-start px-6 py-3 mt-4 w-full text-white bg-gradient-to-b from-[var(--color-special)] to-[var(--color-accent)] 
-            font-bold rounded-lg  hover:scale-105 transition-all duration-300"
+            font-bold rounded-lg cursor-pointer hover:scale-105 transition-all duration-300"
           >
             Let Me In!
           </button>
