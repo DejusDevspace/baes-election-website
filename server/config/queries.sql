@@ -86,9 +86,9 @@ VALUES
 ('John Doe', 'Senate Head', 200, 'Electrical and Electronics Engineering', 'assets/img/candidates/image524.png'),
 ('Mary Doe', 'Senate Chairman', 500, 'Mechatronics Engineering', 'assets/img/candidates/image526.png'),
 ('Jack Harry', 'Senate Head', 500, 'Mechatronics Engineering', 'assets/img/candidates/image524.png'),
-('Blake James', 'Senate Head', 300, 'Mechatronics Engineering', 'assets/img/candidates/image525.png'),
-('Invalid Dan', 'Senate Head', 300, 'Electrical and Electronics Engineering', 'assets/img/candidates/image524.png'),
-('Jane Glory', 'Senate Head', 400, 'Electrical and Electronics Engineering', 'assets/img/candidates/image526.png'),
+('Blake James', 'Senate Head', 200, 'Mechatronics Engineering', 'assets/img/candidates/image525.png'),
+('Invalid Dan', 'Senate Head', 400, 'Electrical and Electronics Engineering', 'assets/img/candidates/image524.png'),
+('Jane Glory', 'Senate Head', 300, 'Electrical and Electronics Engineering', 'assets/img/candidates/image526.png'),
 ('Mark Doe', 'Deputy Senate Chairman', 500, 'Electrical and Electronics Engineering', 'assets/img/candidates/image525.png'),
-('Paul Doe', 'Senate Head', 400, 'Mechatronics Engineering', 'assets/img/candidates/image524.png'),
-('Jake Paul', 'Senate Head', 500, 'Electrical and Electronics Engineering', 'assets/img/candidates/image524.png')
+('Paul Doe', 'Senate Head', 300, 'Mechatronics Engineering', 'assets/img/candidates/image524.png'),
+('Jake Paul', 'Senate Head', 400, 'Electrical and Electronics Engineering', 'assets/img/candidates/image524.png')
