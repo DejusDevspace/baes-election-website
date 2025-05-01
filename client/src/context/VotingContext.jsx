@@ -46,6 +46,21 @@ export const VotingProvider = ({ children }) => {
     fetchElectionData();
   }, [student]);
 
+  useEffect(() => {
+    let interval;
+
+    const startResultsPolling = () => {
+      fetchResults();
+      interval = setInterval(fetchResults, 10000);
+    };
+
+    if (student) {
+      startResultsPolling();
+    }
+
+    return () => clearInterval(interval);
+  }, [student]);
+
   // Cast a vote
   const castVote = async (voteData) => {
     try {
@@ -78,19 +93,14 @@ export const VotingProvider = ({ children }) => {
   };
 
   // Fetch election results
-  const fetchResults = async (electionId = null) => {
+  const fetchResults = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const targetElectionId = electionId || currentElection?.id;
-
-      if (!targetElectionId) {
-        throw new Error("No election specified");
-      }
-
-      const resultsData = await votingService.getResults(targetElectionId);
+      const { resultsData } = await votingService.getResults();
       setResults(resultsData);
+
       return resultsData;
     } catch (err) {
       setError(err.message || "Failed to fetch results");
@@ -100,22 +110,11 @@ export const VotingProvider = ({ children }) => {
     }
   };
 
-  // const hasVoted = (positionId) => {
-  //   return Boolean(userVotes[positionId]);
-  // };
-
-  // // Check if user has completed voting for all positions
-  // const hasCompletedVoting = () => {
-  //   if (!positions.length) return false;
-  //   return positions.every((position) => hasVoted(position.id));
-  // };
-
   return (
     <VotingContext.Provider
       value={{
         candidates,
         positions,
-        // userVotes,
         results,
         loading,
         error,

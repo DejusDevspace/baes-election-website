@@ -42,3 +42,37 @@ export const castVote = async (req, res) => {
     res.status(500).json({ error: "Vote failed" });
   }
 };
+
+export const getResults = async (req, res) => {
+  try {
+    // Fetch candidates and group by position
+    const query = `
+      SELECT position, name, votes_count, level, department
+      FROM candidates
+      ORDER BY position, votes_count DESC;
+    `;
+
+    const result = await db.query(query);
+
+    // Group results by position
+    const resultsData = {};
+
+    result.rows.forEach(
+      ({ position, name, votes_count, level, department }) => {
+        if (!resultsData[position]) {
+          resultsData[position] = [];
+        }
+        resultsData[position].push({ name, votes_count, level, department });
+      }
+    );
+
+    console.log("Results data:", resultsData);
+    res.json({
+      message: "Results fetched successfully!",
+      resultsData,
+    });
+  } catch (err) {
+    console.error("Error fetching results:", err);
+    res.status(500).json({ error: "Failed to fetch election results" });
+  }
+};

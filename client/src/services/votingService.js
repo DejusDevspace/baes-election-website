@@ -66,7 +66,7 @@ const votingService = {
    * @returns {Promise<Object>} - Election results data
    */
   async getResults() {
-    const response = await api.get(`/election/results`);
+    const response = await api.get(`/votes/results`);
     return response.data;
   },
 };

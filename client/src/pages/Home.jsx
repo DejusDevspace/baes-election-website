@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useVoting } from "../context/VotingContext";
+import LivePoll from "../components/common/LivePoll";
 
 const Home = () => {
   const { student } = useContext(AuthContext);
+  const { results } = useVoting();
 
   const LandingContent = () => {
     return (
@@ -23,17 +26,6 @@ const Home = () => {
           <div className="w-full min-h-[550px] lg:w-[550px] lg:min-h-[650px] bg-accent">
             Images
           </div>
-        </div>
-      </div>
-    );
-  };
-
-  const LivePoll = () => {
-    return (
-      <div className="container mx-auto overflow-hidden ">
-        <div className="flex flex-col items-center justify-center min-h-[90vh]">
-          <h1 className="text-4xl">Welcome, {student.surname}</h1>
-          <p>Logged In, Live Poll</p>
         </div>
       </div>
     );
