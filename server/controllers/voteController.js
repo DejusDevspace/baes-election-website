@@ -66,7 +66,6 @@ export const getResults = async (req, res) => {
       }
     );
 
-    console.log("Results data:", resultsData);
     res.json({
       message: "Results fetched successfully!",
       resultsData,
