@@ -5,7 +5,6 @@ import { AuthProvider, AuthContext } from "./context/AuthContext";
 import { VotingProvider } from "./context/VotingContext";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import baesLogo from "./assets/logo.png";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,7 +18,7 @@ const AppContent = () => {
       {loading ? (
         <div className="min-h-screen relative flex items-center justify-center overflow-hidden text-white">
           <img
-            src={baesLogo}
+            src="/assets/logo.png"
             alt="logo"
             className="min-h-[20%] z-10 animate-spin-slow"
           />

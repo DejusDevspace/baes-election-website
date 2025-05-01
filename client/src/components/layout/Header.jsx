@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import baesLogo from "../../assets/logo.png";
 import { AuthContext } from "../../context/AuthContext";
 import { IoExitOutline } from "react-icons/io5";
 import { CiMenuFries } from "react-icons/ci";
@@ -14,7 +13,7 @@ const Header = () => {
     <header className="w-full p-4 z-20">
       <div className="container mx-auto flex justify-between items-center px-6 xl:px-4">
         <a href="/">
-          <img src={baesLogo} alt="logo" className="max-h-[80px]" />
+          <img src="/assets/logo.png" alt="logo" className="max-h-[80px]" />
         </a>
         <div className="hidden lg:flex p-4">
           <nav className="flex space-x-4 list-none">
