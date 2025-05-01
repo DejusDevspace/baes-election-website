@@ -39,22 +39,28 @@ const LivePoll = () => {
                 candidate.department === student?.department
             )
             .map((candidate) => ({
-              name: `${candidate.name}, ${
+              name: `${candidate.name.split(" ")[0]}, ${
                 candidate.department === "Mechatronics Engineering"
                   ? "MCT"
                   : "EEE"
-              } (${candidate.level})`,
+              }(${candidate.level})`,
               votes: candidate.votes_count,
             }))
         : results[selectedPosition].map((candidate) => ({
-            name: `${candidate.name}, ${
+            name: `${candidate.name.split(" ")[0]}, ${
               candidate.department === "Mechatronics Engineering"
                 ? "MCT"
                 : "EEE"
-            } (${candidate.level})`,
+            }(${candidate.level})`,
             votes: candidate.votes_count,
           }))
       : [];
+
+  const labelAngle =
+    chartData.length === 1 ? 0 : chartData.length === 2 ? -30 : -45;
+
+  const anchorPos =
+    chartData.length === 1 ? "middle" : chartData.length === 2 ? "end" : "end";
 
   return (
     <div className="w-full max-w-4xl mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
@@ -82,17 +88,30 @@ const LivePoll = () => {
             </select>
           </div>
 
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <XAxis dataKey="level" />
-              <YAxis allowDecimals={false} />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="votes" fill="#4f46e5" />
-            </BarChart>
-          </ResponsiveContainer>
+          {chartData.length === 0 ? (
+            <p className="text-center text-gray-500">
+              No candidates available for this position
+            </p>
+          ) : (
+            <div className="overflow-x-auto">
+              <ResponsiveContainer width="100%" height={400}>
+                <BarChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="name"
+                    angle={labelAngle}
+                    textAnchor={anchorPos}
+                    interval={0}
+                    height={100}
+                  />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="votes" fill="#4f46e5" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </>
       )}
     </div>
