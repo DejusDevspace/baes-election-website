@@ -33,7 +33,7 @@ const Login = () => {
         pin: formData.pin,
       });
 
-      console.log("Login successful:", student);
+      // console.log("Login successful:", student);
       // console.log("Student data:", student);
       toast.success("Login successful!");
       // Redirect after login
