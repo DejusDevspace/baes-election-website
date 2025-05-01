@@ -1,0 +1,228 @@
+{
+  "candidates": [
+    {
+      "name": "Olayemi Godwin",
+      "department": "Mechatronics Engineering",
+      "level": 100,
+      "position": "Senate Head",
+      "image": "olayemi-godwin.jpeg"
+    },
+    {
+      "name": "Ajayi Babajide",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "Financial Secretary",
+      "image": "ajayi-babajide.jpeg"
+    },
+    {
+      "name": "Babalola Simisola",
+      "department": "Electrical and Electronics Engineering",
+      "level": 200,
+      "position": "Senate Head",
+      "image": "babalola-simisola.jpeg"
+    },
+    {
+      "name": "Nwozor Ifeanyichukwu",
+      "department": "Electrical and Electronics Engineering",
+      "level": 200,
+      "position": "Senate Head",
+      "image": "nwozor-ifeanyichukwu.jpeg"
+    },
+    {
+      "name": "Ogoke Chibueze",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "Social Director",
+      "image": "ogoke-chibueze.jpeg"
+    },
+    {
+      "name": "Akerele Toluwalope",
+      "department": "Mechatronics Engineering",
+      "level": 300,
+      "position": "Senate Head",
+      "image": "akerele-toluwalope.jpeg"
+    },
+    {
+      "name": "Collins Asiwe",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "President",
+      "image": "collins-asiwe.jpeg"
+    },
+    {
+      "name": "Iseoluwa Korede",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Deputy Senate Chairman",
+      "image": "iseoluwa-korede.jpeg"
+    },
+    {
+      "name": "Oni Ebenezer",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Assistant Sport Director",
+      "image": "oni-ebenezer.jpeg"
+    },
+    {
+      "name": "Nwani Emmanuel",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Assistant General Secretary",
+      "image": "nwani-emmanuel.jpeg"
+    },
+    {
+      "name": "Eloke chibuikem",
+      "department": "Electrical and Electronics Engineering",
+      "level": 200,
+      "position": "Assistant Social Director",
+      "image": "eloke-chibuikem.jpeg"
+    },
+    {
+      "name": "Oseni kehinde",
+      "department": "Electrical and Electronics Engineering",
+      "level": 200,
+      "position": "Assistant General Secretary",
+      "image": "oseni-kehinde.jpeg"
+    },
+    {
+      "name": "Iroko Joseph",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Assistant Welfare Director",
+      "image": "iroko-joseph.jpeg"
+    },
+    {
+      "name": "Ikpo David",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Vice President",
+      "image": "ikpo-david.jpeg"
+    },
+    {
+      "name": "Chioma Osueke",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Assistant Sport Director",
+      "image": "chioma-osueke.jpeg"
+    },
+    {
+      "name": "Adeyanju Peter",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "Welfare Director",
+      "image": "adeyanju-peter.jpeg"
+    },
+    {
+      "name": "Awokson Gracious",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Senate Head",
+      "image": "awokson-gracious.jpeg"
+    },
+    {
+      "name": "Chinazom-Chieme Chimkarila",
+      "department": "Electrical and Electronics Engineering",
+      "level": 300,
+      "position": "Senate Head",
+      "image": "chinazom-chieme-chimkarila.jpeg"
+    },
+    {
+      "name": "Jamal Shehu",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "Sport Director",
+      "image": "jamal-shehu.jpeg"
+    },
+    {
+      "name": "Folasire Folarin",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "Senate Head",
+      "image": "folasire-folarin.jpeg"
+    },
+    {
+      "name": "Folorunso Enoch",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Assistant Academic Director",
+      "image": "folorunso-enoch.jpeg"
+    },
+    {
+      "name": "Adebayo Toluwanimi",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Assistant Welfare Director",
+      "image": "adebayo-toluwanimi.jpeg"
+    },
+    {
+      "name": "Nwabueze Christabel",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "Senate Chairman",
+      "image": "nwabueze-christabel.jpeg"
+    },
+    {
+      "name": "David Okusanya",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "Financial Secretary",
+      "image": "david-okusanya.jpeg"
+    },
+    {
+      "name": "Ajiyobiojo Abdulhakeem",
+      "department": "Electrical and Electronics Engineering",
+      "level": 200,
+      "position": "Vice President",
+      "image": "ajiyobiojo-abdulhakeem.jpeg"
+    },
+    {
+      "name": "Chidiogo Nwabuike",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "President",
+      "image": "chidiogo-nwabuike.jpeg"
+    },
+    {
+      "name": "Ajetunmobi Victor",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "Academic Director",
+      "image": "ajetunmobi-victor.jpeg"
+    },
+    {
+      "name": "Ajuwon Oreoluwa",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "General Secretary",
+      "image": "ajuwon-oreoluwa.jpeg"
+    },
+    {
+      "name": "Fagbayide Oluwapelumi",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "Senate Head",
+      "image": "fagbayide-oluwapelumi.jpeg"
+    },
+    {
+      "name": "Olurotimi Oreoluwa",
+      "department": "Electrical and Electronics Engineering",
+      "level": 400,
+      "position": "President",
+      "image": "olurotimi-oreoluwa.jpeg"
+    },
+    {
+      "name": "Olupinla Michael",
+      "department": "Mechatronics Engineering",
+      "level": 400,
+      "position": "Treasurer",
+      "image": "olupinla-michael.jpeg"
+    },
+    {
+      "name": "Faminu Oluwademilade",
+      "department": "Mechatronics Engineering",
+      "level": 200,
+      "position": "Public Relations Officer",
+      "image": "faminu-oluwademilade.jpeg"
+    }
+  ]
+}
