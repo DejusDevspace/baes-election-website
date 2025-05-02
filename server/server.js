@@ -21,7 +21,12 @@ db.connect((err) => {
 });
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://baeselections.vercel.app"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
